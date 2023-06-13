@@ -87,5 +87,5 @@ def get_director(nombre_director:str):
     """
     info = director_info(nombre_director)
     return {'director':info["name"], 'retorno_total_director':info["return_total"], 'peliculas':info["movies_total"], 
-            'anio':info["release_date"], 'retorno_pelicula':info["return_movie"], 'budget_pelicula':info["burget_movie"],
+            'anio':info["release_date"], 'retorno_pelicula':info["return_movie"], 'budget_pelicula':info["budget_movie"],
             'revenue_pelicula':info["revenue_movie"]}

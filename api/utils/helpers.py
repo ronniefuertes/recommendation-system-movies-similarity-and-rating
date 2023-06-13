@@ -1,12 +1,22 @@
 import csv
 import ast
+import os
 
+path12 = "../data/api_data12.csv"
+path3 = "../data/api_data3.csv"
+path4 = "../data/api_data4.csv"
+path5 = "../data/api_data5.csv"
+path6 = "../data/api_data6.csv"
 
-def read_movies_data():
+def read_movies_data(path):
     """Read and return the movies data as a dataframe."""
-    path = "data/api_movies_data.csv"
+    # Get the absolute path of the current script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
 
-    with open(path, "r", encoding="utf-8") as file:
+    # Derive the path to "file.csv" based on the script directory
+    csv_path = os.path.join(script_dir, path)
+
+    with open(csv_path, "r", encoding="utf-8") as file:
         reader = csv.DictReader(file)
         dataframe = list(reader)
         return dataframe
@@ -60,7 +70,7 @@ def count_movies_released_month(month: str) -> int:
 
     count = 0
 
-    dataframe = read_movies_data()
+    dataframe = read_movies_data(path12)
     for row in dataframe:
         release_date = row["release_date"].split("-")
         movie_month = int(release_date[1])
@@ -76,7 +86,7 @@ def count_movies_released_day(day: str) -> int:
     day_number = convert_day_to_number(day)
 
     count = 0
-    dataframe = read_movies_data()
+    dataframe = read_movies_data(path12)
     for row in dataframe:
         release_date = row["release_date"].split("-")
         movie_day = int(release_date[2])
@@ -93,7 +103,7 @@ def movie_popularity(movie: str) -> dict:
 
     info = {"title": [], "year": [], "popularity": []}
 
-    dataframe = read_movies_data()
+    dataframe = read_movies_data(path3)
     for row in dataframe:
         title = row["title"]
         title_normalized = normalize_string(title)
@@ -113,7 +123,7 @@ def movie_vote(movie: str) -> dict:
 
     info = {"title": [], "year": [], "vote_total": [], "vote_average": []}
 
-    dataframe = read_movies_data()
+    dataframe = read_movies_data(path4)
     for row in dataframe:
         title = row["title"]
         title_normalized = normalize_string(title)
@@ -140,7 +150,7 @@ def actor_info(actor: str) -> dict:
     movies_acted = []
     return_total = 0
 
-    dataframe = read_movies_data()
+    dataframe = read_movies_data(path5)
     for row in dataframe:
         actors_list = ast.literal_eval(row["actor_name"])
         for actor_in_list in actors_list:
@@ -167,7 +177,7 @@ def director_info(director: str) -> dict:
     director_name = normalize_string(director)
 
     info = {"name": [], "return_total": [], "movies_total": [], "release_date": [],
-            "return_movie": [], "burget_movie": [], "revenue_movie": []}
+            "return_movie": [], "budget_movie": [], "revenue_movie": []}
 
     return_total = 0
     movies_directed = []
@@ -176,7 +186,7 @@ def director_info(director: str) -> dict:
     movie_budget = []
     movie_revenue = []
 
-    dataframe = read_movies_data()
+    dataframe = read_movies_data(path6)
 
     for row in dataframe:
         directors_list = ast.literal_eval(row["crew_name"])
@@ -200,7 +210,7 @@ def director_info(director: str) -> dict:
     info["movies_total"] = movies_directed
     info["release_date"] = movie_date
     info["return_movie"] = movie_return
-    info["burget_movie"] = movie_budget
+    info["budget_movie"] = movie_budget
     info["revenue_movie"] = movie_revenue
     
     return info
