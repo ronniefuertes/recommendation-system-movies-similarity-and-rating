@@ -1,12 +1,12 @@
 """API para extraer información de la base de datos de películas"""
 
 from fastapi import FastAPI
-from utils.helpers import count_movies_released_month
-from utils.helpers import count_movies_released_day
-from utils.helpers import movie_popularity
-from utils.helpers import movie_vote
-from utils.helpers import actor_info
-from utils.helpers import director_info
+from API.utils.helpers import count_movies_released_month
+from API.utils.helpers import count_movies_released_day
+from API.utils.helpers import movie_popularity
+from API.utils.helpers import movie_vote
+from API.utils.helpers import actor_info
+from API.utils.helpers import director_info
 
 app_description = """
         Los títulos de películas, los nombres de actores y directores deben ir separados por '-'.
