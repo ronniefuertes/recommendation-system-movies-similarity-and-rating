@@ -24,7 +24,7 @@ def movie_recommendation(title: str) -> dict:
 
     similarity=cosine_similarity(vector)
 
-    matching_rows = movies[movies['title'] == title]
+    #matching_rows = movies[movies['title'] == title]
 
     # if len(matching_rows) > 0:
     #     movie_index = matching_rows.index[0]
