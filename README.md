@@ -4,7 +4,7 @@
 The project can be replicated using the `requirements.txt` file.
 
 ## Overview
-Create a generalized movie recommendation system for each user based on the popularity of the movie. The basic idea behind this recommender is that movies that are more popular and critically acclaimed are more likely to be liked by the average audience.
+Create a generalized movie recommendation system for each user based on the similarity of the movie. The basic idea behind this recommender is that movies that are more popular and critically acclaimed are more likely to be liked by the average audience.
 
 The process for creating the system involves performing data engineering (data extraction, transformation, loading, and exposing through an API) and then machine learning (EDA, training).
 
@@ -12,7 +12,7 @@ The process for creating the system involves performing data engineering (data e
 The files for data transformation are located in the "data" folder.
 The "data_processing.ipynb" file contains a step-by-step guide for data verification and transformations, which utilizes the functions from the "validation.py" file.
 The "validation.py" file contains all the functions created for performing the transformations.
-The "raw" folder within this directory contains the original unprocessed data.
+The "raw data" folder within this directory contains the original unprocessed data.
 The following transformations were applied to the data:
 - Two files, "movies_dataset.csv" and "credits.csv," were merged using the common field "id."
 - Duplicate IDs were checked and removed to avoid providing erroneous information about authors and directors.
@@ -23,6 +23,17 @@ The following transformations were applied to the data:
 - The "release_year" column was created using the year from the release date.
 - A new column "return" was created to calculate the return on investment by dividing the "revenue" and "budget" fields. If the data is unavailable, it is set to 0.
 - Columns that won't be used such as "video," "imdb_id," "adult," "original_title," "poster_path," and "homepage" were deleted.
+
+## EDA - Exploratory Data Analysis
+The files for the Exploratory Data Analysis are located in the "data" folder.
+The "data_analysis.ipynb" file contains a step-by-step guide for data analysis, which utilizes the functions from the "helpers.py" file.
+The "helpers.py" file contains all the functions created for performing the transformations.
+The "data" folder within this directory contains the original data.
+
+## ML model
+The files for the movie recommendation system is located her
+The data files are located in the "data" folder.
+The "model.py" file contains function.
 
 ## API Development
 The API files are located in the "api" folder.
@@ -36,3 +47,4 @@ The API files are located in the "api" folder.
   - `/votos_titulo/<titulo_de_la_filmación>`: Returns the title, number of votes, and average rating for the given movie title. The movie must have at least 2000 ratings, otherwise, a message indicating the condition is not met will be returned.
   - `/get_actor/<nombre_actor>`: Returns the success of an actor measured through the return value. Additionally, it returns the count of movies the actor has participated in and the average return. The definition excludes directors.
   - `/get_director/<nombre_director>`: Returns the success of a director measured through the return value. It also returns the title of each movie with its release date, individual return, cost, and revenue.
+  - `/recomendacion/<titulo_de_la_filmación>`: Returns 5 recommendations of movies based on the similarity of the film.
